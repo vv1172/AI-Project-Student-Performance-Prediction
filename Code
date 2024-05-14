@@ -1,0 +1,335 @@
+import pandas as pd import
+seaborn as sb
+import matplotlib.pyplot as plt
+import time as t
+import sklearn.utils as u
+import sklearn.preprocessing as pp
+import sklearn.tree as tr
+import sklearn.ensemble as es
+import sklearn.metrics as m import
+sklearn.linear_model as lm
+import sklearn.neural_network as nn
+import numpy as np
+#import random as rnd
+import warnings as w
+w.filterwarnings(&#39;ignore&#39;) ch
+= 0
+while(ch != 10):
+print(&quot;1.Marks Class Count Graph\t2.Marks Class Semester-wise
+Graph\n3.Marks Class Gender-wise Graph\t4.Marks Class Nationality- wise
+Graph\n5.Marks Class Grade-wise Graph\t6.Marks Class Section- wise
+Graph\n7.Marks Class Topic-wise Graph\t8.Marks Class Stage-wise
+Graph\n9.Marks Class Absent Days-wise\t10.No Graph\n&quot;)
+ch = int(input(&quot;Enter Choice: &quot;)) if
+(ch == 1):
+print(&quot;Loading Graph \n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Count Graph&quot;)
+axes = sb.countplot(x=&#39;Class&#39;, data=data, order=[&#39;L&#39;, &#39;M&#39;, &#39;H&#39;])
+plt.show()
+elif (ch == 2):
+print(&quot;Loading Graph \n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Semester-wise Graph&quot;)
+fig, axesarr = plt.subplots(1, figsize=(10, 6))
+sb.countplot(x=&#39;Semester&#39;, hue=&#39;Class&#39;, data=data, hue_order=[&#39;L&#39;, &#39;M&#39;,
+&#39;H&#39;], axes=axesarr)
+
+plt.show() elif
+(ch == 3):
+print(&quot;Loading Graph..\n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Gender-wise Graph&quot;) fig,
+axesarr = plt.subplots(1, figsize=(10, 6))
+sb.countplot(x=&#39;gender&#39;, hue=&#39;Class&#39;, data=data, order=[&#39;M&#39;, &#39;F&#39;],
+hue_order=[&#39;L&#39;, &#39;M&#39;, &#39;H&#39;], axes=axesarr)
+plt.show() elif
+(ch == 4):
+print(&quot;Loading Graph..\n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Nationality-wise Graph&quot;)
+fig, axesarr = plt.subplots(1, figsize=(10, 6))
+sb.countplot(x=&#39;NationalITy&#39;, hue=&#39;Class&#39;, data=data, hue_order=[&#39;L&#39;, &#39;M&#39;,
+&#39;H&#39;], axes=axesarr)
+plt.show() elif
+(ch == 5):
+print(&quot;Loading Graph: \n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Grade-wise Graph&quot;) fig,
+axesarr = plt.subplots(1, figsize=(10, 6))
+sb.countplot(x=&#39;GradeID&#39;, hue=&#39;Class&#39;, data=data, order=[&#39;G-02&#39;, &#39;G- 04&#39;,
+&#39;G-05&#39;, &#39;G-06&#39;, &#39;G-07&#39;, &#39;G-08&#39;, &#39;G-09&#39;, &#39;G-10&#39;, &#39;G-11&#39;, &#39;G-12&#39;], hue_order
+= [&#39;L&#39;, &#39;M&#39;, &#39;H&#39;], axes=axesarr)
+plt.show()
+elif (ch ==6):
+print(&quot;Loading Graph..\n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Section-wise Graph&quot;) fig,
+axesarr = plt.subplots(1, figsize=(10, 6))
+sb.countplot(x=&#39;SectionID&#39;, hue=&#39;Class&#39;, data=data, hue_order = [&#39;L&#39;, &#39;M&#39;,
+&#39;H&#39;], axes=axesarr)
+plt.show() elif
+(ch == 7):
+print(&quot;Loading Graph..\n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Topic-wise Graph&quot;) fig,
+axesarr = plt.subplots(1, figsize=(10, 6))
+
+sb.countplot(x=&#39;Topic&#39;, hue=&#39;Class&#39;, data=data, hue_order = [&#39;L&#39;, &#39;M&#39;,
+&#39;H&#39;], axes=axesarr)
+plt.show() elif
+(ch == 8):
+print(&quot;Loading Graph..\n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Stage-wise Graph&quot;) fig,
+axesarr = plt.subplots(1, figsize=(10, 6))
+sb.countplot(x=&#39;StageID&#39;, hue=&#39;Class&#39;, data=data, hue_order = [&#39;L&#39;, &#39;M&#39;,
+&#39;H&#39;], axes=axesarr)
+plt.show() elif
+(ch == 9):
+print(&quot;Loading Graph..\n&quot;)
+t.sleep(1)
+print(&quot;\tMarks Class Absent Days-wise Graph&quot;)
+fig, axesarr = plt.subplots(1, figsize=(10, 6))
+sb.countplot(x=&#39;StudentAbsenceDays&#39;, hue=&#39;Class&#39;, data=data,
+hue_order = [&#39;L&#39;, &#39;M&#39;, &#39;H&#39;], axes=axesarr)
+plt.show()
+if(ch == 10):
+print(&quot;Exiting..\n&quot;)
+t.sleep(1)
+#cor = data.corr()
+#print(cor)
+data = data.drop(&quot;gender&quot;, axis=1)
+data = data.drop(&quot;StageID&quot;, axis=1)
+data = data.drop(&quot;GradeID&quot;, axis=1)
+data = data.drop(&quot;NationalITy&quot;, axis=1)
+data = data.drop(&quot;PlaceofBirth&quot;, axis=1)
+data = data.drop(&quot;SectionID&quot;, axis=1) data
+= data.drop(&quot;Topic&quot;, axis=1)
+data = data.drop(&quot;Semester&quot;, axis=1)
+data = data.drop(&quot;Relation&quot;, axis=1)
+data = data.drop(&quot;ParentschoolSatisfaction&quot;, axis=1)
+data = data.drop(&quot;ParentAnsweringSurvey&quot;, axis=1)
+#data = data.drop(&quot;VisITedResources&quot;, axis=1)
+data = data.drop(&quot;AnnouncementsView&quot;, axis=1)
+u.shuffle(data)
+countD = 0
+countP = 0
+
+countL = 0
+countR = 0
+countN = 0
+gradeID_dict = {&quot;G-01&quot; : 1,
+&quot;G-02&quot; : 2,
+&quot;G-03&quot; : 3,
+&quot;G-04&quot; : 4,
+&quot;G-05&quot; : 5,
+&quot;G-06&quot; : 6,
+&quot;G-07&quot; : 7,
+&quot;G-08&quot; : 8,
+&quot;G-09&quot; : 9,
+&quot;G-10&quot; : 10,
+&quot;G-11&quot; : 11,
+&quot;G-12&quot; : 12}
+
+data = data.replace({&quot;GradeID&quot; : gradeID_dict})
+#sig = []
+for column in data.columns:
+if data[column].dtype == type(object): le
+= pp.LabelEncoder()
+data[column] = le.fit_transform(data[column])
+ind = int(len(data) * 0.70)
+feats = data.values[:, 0:4]
+lbls = data.values[:,4]
+feats_Train = feats[0:ind]
+feats_Test = feats[(ind+1):len(feats)]
+lbls_Train = lbls[0:ind]
+lbls_Test = lbls[(ind+1):len(lbls)] modelD
+= tr.DecisionTreeClassifier()
+modelD.fit(feats_Train, lbls_Train)
+lbls_predD = modelD.predict(feats_Test)
+for a,b in zip(lbls_Test, lbls_predD):
+if(a==b): countD
++= 1
+accD = (countD/len(lbls_Test))
+print(&quot;\nAccuracy measures using Decision Tree:&quot;)
+print(m.classification_report(lbls_Test, lbls_predD),&quot;\n&quot;)
+print(&quot;\nAccuracy using Decision Tree: &quot;, str(round(accD, 3)))
+
+t.sleep(1)
+modelR = es.RandomForestClassifier()
+modelR.fit(feats_Train, lbls_Train)
+lbls_predR = modelR.predict(feats_Test)
+for a,b in zip(lbls_Test, lbls_predR):
+if(a==b): countR
++= 1
+print(&quot;\nAccuracy Measures for Random Forest Classifier: \n&quot;)
+#print(&quot;\nConfusion Matrix: \n&quot;, m.confusion_matrix(lbls_Test,
+lbls_predR))
+print(&quot;\n&quot;, m.classification_report(lbls_Test,lbls_predR))
+accR = countR/len(lbls_Test)
+print(&quot;\nAccuracy using Random Forest: &quot;, str(round(accR, 3)))
+t.sleep(1)
+modelP = lm.Perceptron()
+modelP.fit(feats_Train, lbls_Train)
+lbls_predP = modelP.predict(feats_Test)
+for a,b in zip(lbls_Test, lbls_predP):
+if a == b: countP
++= 1
+accP = countP/len(lbls_Test)
+print(&quot;\nAccuracy measures using Linear Model Perceptron:&quot;)
+print(m.classification_report(lbls_Test, lbls_predP),&quot;\n&quot;) print(&quot;\nAccuracy
+using Linear Model Perceptron: &quot;, str(round(accP, 3)), &quot;\n&quot;)
+t.sleep(1)
+modelL = lm.LogisticRegression()
+modelL.fit(feats_Train, lbls_Train)
+lbls_predL = modelL.predict(feats_Test)
+for a,b in zip(lbls_Test, lbls_predL):
+if a == b: countL
++= 1
+accL = countL/len(lbls_Test)
+print(&quot;\nAccuracy measures using Linear Model Logistic Regression:&quot;)
+print(m.classification_report(lbls_Test, lbls_predL),&quot;\n&quot;) print(&quot;\nAccuracy
+using Linear Model Logistic Regression: &quot;, str(round(accP, 3)), &quot;\n&quot;)
+t.sleep(1)
+modelN = nn.MLPClassifier(activation=&quot;logistic&quot;)
+modelN.fit(feats_Train, lbls_Train)
+lbls_predN = modelN.predict(feats_Test)
+for a,b in zip(lbls_Test, lbls_predN):
+
+#sig.append(1/(1+ np.exp(-b))) if
+a==b:
+countN += 1
+#print(&quot;\nAverage value of Sigmoid Function: &quot;, str(round(np.average(sig),
+3)))
+print(&quot;\nAccuracy measures using MLP Classifier:&quot;)
+print(m.classification_report(lbls_Test, lbls_predN),&quot;\n&quot;)
+accN = countN/len(lbls_Test)
+print(&quot;\nAccuracy using Neural Network MLP Classifier: &quot;, str(round(accN,
+3)), &quot;\n&quot;)
+choice = input(&quot;Do you want to test specific input (y or n): &quot;)
+if(choice.lower()==&quot;y&quot;):
+gen = input(&quot;Enter Gender (M or F): &quot;) if
+(gen.upper() == &quot;M&quot;):
+gen = 1
+elif (gen.upper() == &quot;F&quot;):
+gen = 0
+nat = input(&quot;Enter Nationality: &quot;)
+pob = input(&quot;Place of Birth: &quot;)
+sta = input(&quot;Enter Stage ID(Lower level, Middle school, High school):
+&quot;)
+if (sta == &quot;Lower level&quot;):
+sta = 2
+elif(sta == &quot;Middle school&quot;):
+sta = 1
+elif (sta == &quot;High school&quot;):
+sta = 0
+gra = input(&quot;Grade ID as (G-&lt;grade&gt;): &quot;) if(gra
+== &quot;G-02&quot;):
+gra = 2
+elif (gra == &quot;G-04&quot;):
+gra = 4
+elif (gra == &quot;G-05&quot;):
+gra = 5
+elif (gra == &quot;G-06&quot;):
+gra = 6
+elif (gra == &quot;G-07&quot;):
+gra = 7
+elif (gra == &quot;G-08&quot;):
+gra = 8
+
+elif (gra == &quot;G-09&quot;):
+gra = 9
+elif (gra == &quot;G-10&quot;):
+gra = 10
+elif (gra == &quot;G-11&quot;):
+gra = 11
+elif (gra == &quot;G-12&quot;):
+gra = 12
+sec = input(&quot;Enter Section: &quot;)
+top = input(&quot;Enter Topic: &quot;)
+sem = input(&quot;Enter Semester (F or S): &quot;) if
+(sem.upper() == &quot;F&quot;):
+sem = 0
+elif (sem.upper() == &quot;S&quot;):
+sem = 1
+rel = input(&quot;Enter Relation (Father or Mum): &quot;) if
+(rel == &quot;Father&quot;):
+rel = 0
+elif (rel == &quot;Mum&quot;):
+rel = 1
+rai = int(input(&quot;Enter raised hands: &quot;))
+res = int(input(&quot;Enter Visited Resources: &quot;))
+ann = int(input(&quot;Enter announcements viewed: &quot;))
+dis = int(input(&quot;Enter no. of Discussions: &quot;))
+sur = input(&quot;Enter Parent Answered Survey (Y or N): &quot;) if
+(sur.upper() == &quot;Y&quot;):
+sur = 1
+elif (sur.upper() == &quot;N&quot;):
+sur = 0
+sat = input(&quot;Enter Parent School Satisfaction (Good or Bad): &quot;) if
+(sat == &quot;Good&quot;):
+sat = 1
+elif (sat == &quot;Bad&quot;):
+sat = 0
+absc = input(&quot;Enter No. of Abscenes(Under-7 or Above-7): &quot;) if
+(absc == &quot;Under-7&quot;):
+absc = 1
+elif (absc == &quot;Above-7&quot;):
+absc = 0
+arr = np.array([rai, res, dis, absc])
+
+#arr = np.array([gen, rnd.randint(0, 30), rnd.randint(0, 30), sta, gra,
+rnd.randint(0, 30), rnd.randint(0, 30), sem, rel, rai, res, ann, dis, sur, sat,
+absc])
+predD = modelD.predict(arr.reshape(1, -1))
+predR = modelR.predict(arr.reshape(1, -1))
+predP = modelP.predict(arr.reshape(1, -1))
+predL = modelL.predict(arr.reshape(1, -1))
+predN = modelN.predict(arr.reshape(1, -1)) if
+(predD == 0):
+predD = &quot;H&quot; elif
+(predD == 1):
+predD = &quot;M&quot; elif
+(predD == 2):
+predD = &quot;L&quot; if
+(predR == 0):
+predR = &quot;H&quot; elif
+(predR == 1):
+predR = &quot;M&quot; elif
+(predR == 2):
+predR = &quot;L&quot; if
+(predP == 0):
+predP = &quot;H&quot; elif
+(predP == 1):
+predP = &quot;M&quot; elif
+(predP == 2):
+predP = &quot;L&quot; if
+(predL == 0):
+predL = &quot;H&quot; elif
+(predL == 1):
+predL = &quot;M&quot; elif
+(predL == 2):
+predL = &quot;L&quot; if
+(predN == 0):
+predN = &quot;H&quot; elif
+(predN == 1):
+predN = &quot;M&quot; elif
+(predN == 2):
+predN = &quot;L&quot;
+t.sleep(1)
+print(&quot;\nUsing Decision Tree Classifier: &quot;, predD)
+
+t.sleep(1)
+print(&quot;Using Random Forest Classifier: &quot;, predR)
+t.sleep(1)
+print(&quot;Using Linear Model Perceptron: &quot;, predP)
+t.sleep(1)
+print(&quot;Using Linear Model Logisitic Regression: &quot;, predL)
+t.sleep(1)
+print(&quot;Using Neural Network MLP Classifier: &quot;, predN)
+print(&quot;\nExiting...&quot;)
+t.sleep(1)
+else:
+print(&quot;Exiting..&quot;)
+t.sleep(1)
